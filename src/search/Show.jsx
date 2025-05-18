@@ -67,7 +67,7 @@ useEffect(()=>{
   <div className="w-full flex flex-column flex-wrap justify-around my-4"> {searchdata.map((i,ind)=>{
          return(
          <>
- <div className="flex flex-col my-6 justify-center md:gap-x-8  md:justify-evenly lg:flex-row">
+ <div className="flex flex-col my-6 justify-center">
  <div className="w-full flex gap-4 flex-row flex-wrap justify-center items-center">
 <div className="rounded-lg bg-white shadow-lg shadow-sky-700 w-40 h-40 font-bold hover:scale-105 font-bold hover:ease-in-out duration-300">
 <img src={i.sprites.other.dream_world.front_default}  className="h-40 w-40"/>
