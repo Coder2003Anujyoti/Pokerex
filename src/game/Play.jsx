@@ -246,6 +246,8 @@ const rand=Math.floor(Math.random()*638)
 }
 {
   toggle===true && <>
+    <div className="w-full flex flex-col gap-4 text-center font-bold text-base">
+  <h1>Choose Mode</h1>
   <div className="w-full flex my-4 flex-row flex-wrap justify-center gap-y-4 gap-x-6">
 {
   modes.map((i)=>{
@@ -254,6 +256,7 @@ const rand=Math.floor(Math.random()*638)
     </>)
   })
 }
+</div>
 </div>
   </>
 }
