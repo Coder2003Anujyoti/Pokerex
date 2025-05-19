@@ -38,7 +38,7 @@ const Details = () => {
       setSubloading(false);
       setDisable(false);
       }
-      else if(offset>=639){
+      else if(offset>=1015){
         setPokemon([...pokemon,detailedResponses]);
       setLoading(false);
       setSubloading(false);
@@ -57,12 +57,12 @@ const Details = () => {
     }
   };
   useEffect(()=>{
-    if(offset<649){
+    if(offset<1025){
     fetchPokemon()
     }
   },[offset])
   const func=()=>{
-    if(offset<649){
+    if(offset<1025){
     setOffset(offset+10);
     setDisable(true);
     setSubloading(true);
@@ -84,7 +84,7 @@ const Details = () => {
       throw new Error("Pokemon not found");
     }
     const data = await response.json();
-    if(data.id>649){
+    if(data.id>1025){
       throw new Error("Pokemon not found");
     }
     setSload(true)
@@ -154,11 +154,14 @@ showsh(n.trim())
      {pokemon.map((item,index) => { return (
     <>
     {item.map((item)=>{
-    if(item.id<650)
+    if(item.id<1026)
     return(<>
     <HashLink smooth to={`/show?id=${item.name}`}>
     <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
-<img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>
+{ item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
+{
+  item.id>=650 && item.id<1026 && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`} className="h-32 w-32"/>
+}
 <h2 className="text-sm text-black font-bold md:text-xl ml-2 mr-2">{item.name[0].toUpperCase()+item.name.slice(1)}</h2>
     </div>
     </HashLink>
@@ -204,7 +207,10 @@ showsh(n.trim())
     <>
      <HashLink smooth to={`/show?id=${item.name}`}>
         <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
- <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>
+  { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
+{
+  item.id>=650 && item.id<1026 && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`} className="h-32 w-32"/>
+}
 <h2 className="text-sm text-black font-bold md:text-xl ml-2 mr-2">{item.name[0].toUpperCase()+item.name.slice(1)}</h2>
     </div>
     </HashLink>

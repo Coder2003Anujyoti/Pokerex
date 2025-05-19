@@ -15,28 +15,44 @@ const [searchdata,setSearchdata]=useState([])
   const id = queryParams.get('id');
 const get_pokemon=async()=>{
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id.toLowerCase()}`);
-  const data=await res.json();
-  const speciesRes = await fetch(data.species.url);
- const speciesData = await speciesRes.json();
+const data = await res.json();
+
+const speciesRes = await fetch(data.species.url);
+const speciesData = await speciesRes.json();
+
 const evolutionRes = await fetch(speciesData.evolution_chain.url);
 const evolutionData = await evolutionRes.json();
- const getEvolutions = (chain) => {
-          const evoList = [];
-          let current = chain;
-          while (current) {
-            evoList.push(current.species.name);
-            current = current.evolves_to[0];
-          }
-          return evoList;
-        };
-        const family = getEvolutions(evolutionData.chain);
-        setEvolutions(family);
-  setTimeout(()=>{
-   setSearchdata([data])
-   setNumber(data.id)
-   setName(data.name)
-    setLoad(false)
-  },2000)
+
+const getEvolutions = (chain) => {
+  const evoList = [];
+  let current = chain;
+  while (current) {
+    evoList.push(current.species.name);
+    current = current.evolves_to[0];
+  }
+  return evoList;
+};
+
+const family = getEvolutions(evolutionData.chain);
+
+// Fetch IDs of all evolution species
+const familyWithIds = await Promise.all(
+  family.map(async (name) => {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
+    const json = await res.json();
+    return { name, id: json.id };
+  })
+);
+const u=familyWithIds.filter((i)=>i.name!=data.name)
+
+setEvolutions(u); // [{ name: 'rockruff', id: 744 }, { name: 'lycanroc', id: 745 }]
+
+setTimeout(() => {
+  setSearchdata([data]);
+  setNumber(data.id);
+  setName(data.name);
+  setLoad(false);
+}, 2000);
 }
 useEffect(()=>{
    window.scrollTo({ top: 0, behavior: "smooth" });
@@ -70,7 +86,10 @@ useEffect(()=>{
  <div className="flex flex-col my-6 justify-center">
  <div className="w-full flex gap-4 flex-row flex-wrap justify-center items-center">
 <div className="rounded-lg bg-white shadow-lg shadow-sky-700 w-40 h-40 font-bold hover:scale-105 font-bold hover:ease-in-out duration-300">
-<img src={i.sprites.other.dream_world.front_default}  className="h-40 w-40"/>
+{ i.id<650 && <img src={i.sprites.other.dream_world.front_default}  className="h-40 w-40"/>}
+{
+  (i.id>=650 && i.id<1026) && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${i.id}.png`} className="h-40 w-40"/>
+}
 </div>
  <div className="rounded-lg bg-white shadow-lg shadow-sky-700  font-bold w-40 h-40 hover:scale-105 font-bold hover:ease-in-out duration-300">
 <img src={ `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i.id}.png`} className="w-40 h-40"/> 
@@ -122,17 +141,17 @@ useEffect(()=>{
         </p>
         </div>
         </div>
-    { evolutions.filter((i)=>i!=name).length>0 && <>
+    { evolutions.filter((i)=>i.name!=name).length>0 && <>
         <div className="w-full flex flex-col gap-2 text-center justify-center items-center my-3 text-black text-lg font-bold">
         <h1>Evolutionary Species</h1>
          <div className="w-full flex flex-row flex-wrap my-4 justify-center items-center gap-4 text-center">{
         evolutions.map((i)=>{
-        if(i!=name)
+        if(i.name!=name)
           return(<>
 
           <div className="bg-white shadow-lg shadow-sky-700 w-40 flex justify-center flex-col items-center h-40 font-bold rounded-lg hover:scale-105 font-bold hover:ease-in-out duration-300 text-sm">
-<img src={`https://img.pokemondb.net/artwork/large/${i}.jpg`} className="w-32 h-32" />
-          <h1>{i[0].toUpperCase()+i.slice(1).toLowerCase()}</h1>
+<img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i.id}.png`} className="w-32 h-32" />
+          <h1>{i.name[0].toUpperCase()+i.name.slice(1).toLowerCase()}</h1>
           </div>
           </>)
         })
