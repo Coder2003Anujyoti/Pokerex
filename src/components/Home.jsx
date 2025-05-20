@@ -75,7 +75,7 @@ useEffect(()=>{
 <div className="flex items-center space-x-3 flex-col mb-4">
 <img src="Home/Go.png" className="w-54 h-36" alt="Angry Birds"  />
 </div>
-<p className="text-sm font-bold text-white">Discover the world of Pokémon where adventure never ends! From thrilling battles to legendary discoveries, there's always something new to explore. Stay connected with the community, track your journey, and catch ‘em all as you grow your Pokédex. Whether you're a seasoned trainer or just starting out, the Pokémon universe welcomes you. Let the journey continue beyond the final badge!
+<p className="text-sm font-bold text-white">Discover the world of Pokémon where adventure never ends! From thrilling battles to legendary discoveries, there's always something new to explore. Stay connected with the community, track your journey, and catch ‘em all as you grow your app. Whether you're a seasoned trainer or just starting out, the Pokémon universe welcomes you. Let the journey continue beyond the final badge!
 </p></div>
 <div className="space-y-4">
 <h3 className="text-lg font-semibold">Connect with Us</h3>
