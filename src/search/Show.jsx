@@ -6,20 +6,38 @@ import Button from '@mui/material/Button';
 import {HashLink} from 'react-router-hash-link'
 const Show = () => {
 const [evolutions, setEvolutions] = useState([]);
+const [weak,setWeak]=useState([])
 const [load,setLoad]=useState(true)
 const [name,setName]=useState(null)
 const [number,setNumber]=useState(null)
 const [searchdata,setSearchdata]=useState([])
+const [description,setDescription]=useState("")
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
+  const ident=queryParams.get('sn');
+  const abt=queryParams.get('abt');
 const get_pokemon=async()=>{
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id.toLowerCase()}`);
+  const [res,desc,typeRes] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${id.toLowerCase()}`),fetch(`https://pokeapi.co/api/v2/pokemon-species/${ident}`),fetch(`https://pokeapi.co/api/v2/type/${abt}`)]);
 const data = await res.json();
+const speciesDesc = await desc.json();
+const damageRelations= await typeRes.json();
+const weaknessesSet = new Set();
+damageRelations.damage_relations.double_damage_from.forEach(dmgType => {
+  weaknessesSet.add(dmgType.name);
+});
 
-const speciesRes = await fetch(data.species.url);
+  const weaknesses = Array.from(weaknessesSet).slice(0,1);
+  const flavorEntry = speciesDesc.flavor_text_entries.find(
+    entry => entry.language.name === 'en'
+  );
+  const descn = flavorEntry ? flavorEntry.flavor_text.replace(/\n|\f/g, ' ') : 'No description available.';
+  
+  
+  
+  
+const speciesRes= await fetch(data.species.url);
 const speciesData = await speciesRes.json();
-
 const evolutionRes = await fetch(speciesData.evolution_chain.url);
 const evolutionData = await evolutionRes.json();
 
@@ -49,10 +67,12 @@ setEvolutions(u); // [{ name: 'rockruff', id: 744 }, { name: 'lycanroc', id: 745
 
 setTimeout(() => {
   setSearchdata([data]);
+  setWeak([weaknesses])
+  setDescription(descn)
   setNumber(data.id);
   setName(data.name);
   setLoad(false);
-}, 2000);
+},1200);
 }
 useEffect(()=>{
    window.scrollTo({ top: 0, behavior: "smooth" });
@@ -99,6 +119,7 @@ useEffect(()=>{
 <div className="flex justify-center items-center">
  <button className="pl-6 pr-6 px-2 py-2 flex justify-center items-center bg-sky-700 text-white rounded-md font-bold">#{i.id}</button>
 </div>
+
 <div className="  flex flex-col justify-center text-lg font-bold my-2">
  <div className="w-full flex justify-center"><p className="text-lg font-bold  md:text-lg">Name-: {i.name[0].toUpperCase()+i.name.slice(1)}</p></div>
  <div className="w-full flex justify-center text-lg font-bold"> <p className="pokemon-info-type">
@@ -110,10 +131,15 @@ useEffect(()=>{
               .slice(0,1)
               .join(", ")}
           </p></div>
-               <div className="w-full flex justify-center text-lg font-bold">  <p className="pokemon-info-abilities">
-
+   <div className="w-full flex justify-center text-lg font-bold">  <p className="pokemon-info-abilities">
+Weakness-: {weak}
           </p></div>
           </div>
+{ description!='No description available.' &&
+  <div className="flex flex-col text-black font-bold text-lg gap-y-1 items-center justify-center">
+   <button className="pl-6 pr-6 px-2 py-2 w-72 flex justify-center items-center bg-sky-700 text-white text-base rounded-md font-bold">{description}</button>
+  </div>
+  }
     <div className="flex w-full flex-row flex-wrap gap-x-8">
       <div className="p-4 ml-2 flex flex-col text-lg  font-bold justify-center">
        <div> <p className="pokemon-info-one">

@@ -103,7 +103,7 @@ const Details = () => {
   finally{
   setTimeout(()=>{
   setSload(false)
-  },1500)
+  },1200)
   }
 };
 const showsearch=(n)=>{
@@ -156,7 +156,7 @@ showsh(n.trim())
     {item.map((item)=>{
     if(item.id<1026)
     return(<>
-    <HashLink smooth to={`/show?id=${item.name}`}>
+    <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
     <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
 { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
 {
@@ -205,7 +205,7 @@ showsh(n.trim())
  ">
      {store.map((item,index) => { return (
     <>
-     <HashLink smooth to={`/show?id=${item.name}`}>
+     <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
         <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
   { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
 {
