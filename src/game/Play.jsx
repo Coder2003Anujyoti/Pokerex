@@ -11,6 +11,7 @@ const Play=()=>{
   const [cchose,setCchose]=useState([])
   const [toggle,setToggle]=useState(false)
   const [mode,setMode]=useState("")
+  const [cstat,setCstat]=useState("")
   const [pmode,setPmode]=useState(0)
   const [cmode,setCmode]=useState(0)
   const [ppoint,setPpoint]=useState(0)
@@ -64,109 +65,125 @@ const rand=Math.floor(Math.random()*638)
    setPoints(v)
    setToggle(true)
    setMode("")
+   setCstat("")
  }
  const decide=(i)=>{
+ const arr=[1,2,5,0]
+ const k=arr[Math.floor(Math.random()*4)];
+ const val=modes[arr.indexOf(k)]
    if(i=="Attack"){
-     if(pchose[0].stats[1].base_stat>cchose[0].stats[1].base_stat){
+     if(pchose[0].stats[1].base_stat>cchose[0].stats[k].base_stat){
        setPpoint(ppoint+1)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-       setCmode(cchose[0].stats[1].base_stat)
+       setCstat(val)
+       setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[1].base_stat)
      }
-    if(pchose[0].stats[1].base_stat<cchose[0].stats[1].base_stat){
+    if(pchose[0].stats[1].base_stat<cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint+1)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[1].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[1].base_stat)
      }
-        if(pchose[0].stats[1].base_stat === cchose[0].stats[1].base_stat){
+        if(pchose[0].stats[1].base_stat === cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[1].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[1].base_stat)
      }
    }
       if(i=="Defence"){
-     if(pchose[0].stats[2].base_stat>cchose[0].stats[2].base_stat){
+     if(pchose[0].stats[2].base_stat>cchose[0].stats[k].base_stat){
        setPpoint(ppoint+1)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-       setCmode(cchose[0].stats[2].base_stat)
+       setCstat(val)
+       setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[2].base_stat)
      }
-    if(pchose[0].stats[2].base_stat<cchose[0].stats[2].base_stat){
+    if(pchose[0].stats[2].base_stat<cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint+1)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[2].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[2].base_stat)
      }
-        if(pchose[0].stats[2].base_stat === cchose[0].stats[2].base_stat){
+        if(pchose[0].stats[2].base_stat === cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[2].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[2].base_stat)
      }
    }
       if(i=="Speed"){
-  if(pchose[0].stats[5].base_stat>cchose[0].stats[5].base_stat){
+  if(pchose[0].stats[5].base_stat>cchose[0].stats[k].base_stat){
        setPpoint(ppoint+1)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-       setCmode(cchose[0].stats[5].base_stat)
+       setCstat(val)
+       setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[5].base_stat)
      }
-    if(pchose[0].stats[5].base_stat<cchose[0].stats[5].base_stat){
+    if(pchose[0].stats[5].base_stat<cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint+1)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[5].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[5].base_stat)
      }
-        if(pchose[0].stats[5].base_stat === cchose[0].stats[5].base_stat){
+        if(pchose[0].stats[5].base_stat === cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[5].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[5].base_stat)
      }
    }
          if(i=="HP"){
-  if(pchose[0].stats[0].base_stat>cchose[0].stats[0].base_stat){
+  if(pchose[0].stats[0].base_stat>cchose[0].stats[k].base_stat){
        setPpoint(ppoint+1)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-       setCmode(cchose[0].stats[0].base_stat)
+       setCstat(val)
+       setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[0].base_stat)
      }
-    if(pchose[0].stats[0].base_stat<cchose[0].stats[0].base_stat){
+    if(pchose[0].stats[0].base_stat<cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint+1)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[0].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[0].base_stat)
      }
-        if(pchose[0].stats[0].base_stat === cchose[0].stats[0].base_stat){
+        if(pchose[0].stats[0].base_stat === cchose[0].stats[k].base_stat){
        setPpoint(ppoint)
        setCpoint(cpoint)
        setToggle(false)
        setMode(i)
-      setCmode(cchose[0].stats[0].base_stat)
+       setCstat(val)
+      setCmode(cchose[0].stats[k].base_stat)
        setPmode(pchose[0].stats[0].base_stat)
      }
    }
@@ -223,7 +240,7 @@ const rand=Math.floor(Math.random()*638)
   { cchose.length>0 && <>
   <img src={cchose[0].sprites.other.dream_world.front_default} className="w-24 h-24" /> 
   <h1 className="font-bold text-base">{cchose[0].name[0].toUpperCase()+cchose[0].name.slice(1).toLowerCase()}</h1>
-  { mode!="" && <h1 className="font-bold text-base">{mode}-:{cmode}</h1>}
+  { mode!="" && <h1 className="font-bold text-base">{cstat}-:{cmode}</h1>}
   </>
   }
   </div>
