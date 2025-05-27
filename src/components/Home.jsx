@@ -24,20 +24,20 @@ useEffect(()=>{
   <>
       {load==true && <>
     <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
-    <img src="Home/Go.png"  className="w-72 h-54" />
+    <img src="Home/Go.webp"  className="w-72 h-54" />
     </div>
   </>}
   { load===false && <>
     <div className="w-full h-18 flex gap-x-6 bg-sky-600">
-  <img src="Home/5.png" onClick={()=>
+  <img src="Home/5.webp" onClick={()=>
     window.location.reload()} className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
   <div className="w-full flex items-center justify-center">
-    <img src="Home/Txt.png" className="w-40 h-16" />
+    <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
   </div>
 <div className="w-full my-1 gap-4 flex justify-center flex-col">
 <div className="w-full flex justify-center">
-<img src="Home/1.png" className="w-80 h-36" />
+<img src="Home/1.webp" className="w-80 h-36" />
 </div>
 <div id="about" className="w-full flex flex-col justify-center items-center">
 <div className="w-full flex flex-row flex-wrap font-bold text-xs">
@@ -65,7 +65,7 @@ useEffect(()=>{
 <div id="gallery" className="w-full flex py-6 items-center flex-col justify-center gap-8">
 <div className="w-full flex justify-center items-center gap-3 flex-row flex-wrap">
     <div className="flex flex-row flex-wrap">
-    <img className="w-80 h-30" src={`Home/2.png`} />
+    <img className="w-80 h-30" src={`Home/2.webp`} />
     </div>
 </div>
 </div>
@@ -73,7 +73,7 @@ useEffect(()=>{
 <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
 <div>
 <div className="flex items-center space-x-3 flex-col mb-4">
-<img src="Home/Go.png" className="w-54 h-36" alt="Angry Birds"  />
+<img src="Home/Go.webp" className="w-54 h-36" alt="Angry Birds"  />
 </div>
 <p className="text-sm font-bold text-white">Discover the world of Pokémon where adventure never ends! From thrilling battles to legendary discoveries, there's always something new to explore. Stay connected with the community, track your journey, and catch ‘em all as you grow your app. Whether you're a seasoned trainer or just starting out, the Pokémon universe welcomes you. Let the journey continue beyond the final badge!
 </p></div>

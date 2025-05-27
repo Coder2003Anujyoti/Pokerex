@@ -119,17 +119,17 @@ showsh(n.trim())
   return(<>
         {loading==true && showpage===null && <>
     <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
-    <img src="Home/Go.png"  className="w-72 h-54" />
+    <img src="Home/Go.webp"  className="w-72 h-54" />
     </div>
   </>}
  {showpage===true && <>
  
      <div className="w-full h-18 flex gap-x-6 bg-sky-600">
 <HashLink smooth to='/'>
-  <img src="Home/5.png" className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
+  <img src="Home/5.webp" className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
   </HashLink>
   <div className="w-full flex items-center justify-center">
-    <img src="Home/Txt.png" className="w-40 h-16" />
+    <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
   </div>
   <div className="flex justify-center mt-4">

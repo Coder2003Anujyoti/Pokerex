@@ -191,20 +191,20 @@ const rand=Math.floor(Math.random()*638)
  return(<>
        {load==true && <>
     <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
-    <img src="Home/Go.png"  className="w-72 h-54" />
+    <img src="Home/Go.webp"  className="w-72 h-54" />
     </div>
   </>}
   { load===false && <>
     <div className="w-full h-18 flex gap-x-6 bg-sky-600">
 <HashLink smooth to='/'>
-  <img src="Home/5.png"  className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
+  <img src="Home/5.webp"  className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
 </HashLink>
   <div className="w-full flex items-center justify-center">
-    <img src="Home/Txt.png" className="w-40 h-16" />
+    <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
   </div>
   <div className="w-full flex items-center text-center flex-col gap-4 justify-center">
-<img src="Home/1.png" className="w-80 h-36" />
+<img src="Home/1.webp" className="w-80 h-36" />
 { starts===false && 
 <div className="my-10 flex flex-col gap-4">
 <h1 className="font-bold text-base">Select any 6 Pokemons</h1>
