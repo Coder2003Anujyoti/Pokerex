@@ -284,7 +284,7 @@ showsh(n.trim())
   <div className="flex justify-center gap-2 mt-4">
   <div className="relative w-72">
     <input
-      type="text" value={text} onChange={(e)=>{
+      type="text" value={text} disabled={sload} onChange={(e)=>{
       setText(e.target.value)
       setStore([])
       setMsg("")
@@ -292,7 +292,7 @@ showsh(n.trim())
       }
       }
       placeholder="Search Pokemon..."
-      className="w-full font-bold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+      className="w-full font-bold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition disabled:bg-white"
     />
     <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-500 text-xl" onClick={()=>showsearch(text)}/>
 </div>
@@ -303,7 +303,7 @@ showsh(n.trim())
   }
 </div>
   {
-    isOpen===true && 
+    isOpen===true && text.length==0 && 
     <>
 <div className="flex justify-center mt-4">
   <ul
