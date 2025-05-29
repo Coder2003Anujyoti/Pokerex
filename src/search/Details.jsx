@@ -292,9 +292,11 @@ showsh(n.trim())
       }
       }
       placeholder="Search Pokemon..."
-      className="w-full font-bold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition disabled:bg-white"
+      className="w-full font-bold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition disabled:bg-white disabled:text-black"
     />
-    <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-500 text-xl" onClick={()=>showsearch(text)}/>
+    <button disabled={sload} onClick={()=>showsearch(text)} >
+    <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-500 text-xl"/>
+    </button>
 </div>
 { text.length===0 && 
 <div className="p-2 bg-white rounded-md cursor-pointer transition flex items-center" onClick={() => setIsOpen(!isOpen)}>
