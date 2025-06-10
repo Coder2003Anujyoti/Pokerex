@@ -69,7 +69,7 @@ const rand=Math.floor(Math.random()*638)
  }
  const decide=(i)=>{
  const arr=[1,2,5,0]
- const k=arr[Math.floor(Math.random()*4)];
+ const k=arr[modes.indexOf(i)];
  const val=modes[arr.indexOf(k)]
    if(i=="Attack"){
      if(pchose[0].stats[1].base_stat>cchose[0].stats[k].base_stat){
