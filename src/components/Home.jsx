@@ -23,7 +23,7 @@ useEffect(()=>{
   return (
   <>
       {load==true && <>
-    <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
+    <div className="w-full flex flex-col items-center justify-center gap-4 my-56">
     <img src="Home/Go.webp"  className="w-72 h-54" />
     </div>
   </>}
