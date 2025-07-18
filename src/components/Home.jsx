@@ -39,7 +39,7 @@ useEffect(()=>{
   {/* //*Navbar for mobile */}
     <div className="w-full h-18 flex gap-x-6 bg-sky-600 md:hidden">
   <img src="Home/5.webp" onClick={()=>
-    window.location.reload()} className="w-14 h-16 ml-2 mr-2 mx-1 my-1"/>
+    window.location.reload()} className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
   <div className="w-full flex items-center justify-center">
     <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
