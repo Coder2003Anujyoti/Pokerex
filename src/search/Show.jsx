@@ -214,7 +214,7 @@ Weakness-: {weak}
        })
        }
 </div>
-<div className="w-full flex flex-col gap-10 my-4 hidden md:flex">
+<div className="w-full flex-col gap-10 my-4 hidden md:flex">
   {searchdata.map((i, ind) => (
     <div
       key={i.id}
