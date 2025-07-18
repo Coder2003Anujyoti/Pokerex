@@ -217,7 +217,7 @@ useEffect(()=>{
 </div>
 <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-sky-500 text-white p-2 sm:p-3 rounded-full shadow-md sm:shadow-lg hover:bg-sky-600 transition-all duration-300 z-50"
+  className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-sky-600 text-white p-2 sm:p-3 rounded-full shadow-md sm:shadow-lg  transition-all duration-300 z-50"
   aria-label="Scroll to top"
 >
   <FaArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -267,7 +267,7 @@ useEffect(()=>{
   </div>
   <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-sky-500 text-white p-2 sm:p-3 rounded-full shadow-md sm:shadow-lg hover:bg-sky-600 transition-all duration-300 z-50"
+  className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-sky-600 text-white p-2 sm:p-3 rounded-full shadow-md sm:shadow-lg  transition-all duration-300 z-50"
   aria-label="Scroll to top"
 >
   <FaArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />

@@ -342,7 +342,7 @@ Weakness-: {weak}
 </div>
   <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed bottom-6 right-6 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-500 transition"
+  className="fixed bottom-6 right-6 bg-sky-600 text-white p-3 rounded-full shadow-lg transition"
   aria-label="Scroll to top"
 >
 <FaArrowUp />
@@ -351,7 +351,7 @@ Weakness-: {weak}
 <HashLink smooth to="/details">
 <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed left-6 bottom-6 bg-sky-500 hidden md:block text-white p-3 rounded-full shadow-lg hover:bg-sky-700 transition"
+  className="fixed left-6 bottom-6 bg-sky-600 hidden md:block text-white p-3 rounded-full shadow-lg  transition"
   aria-label="Scroll to top"
 >
 <FaArrowLeft />
