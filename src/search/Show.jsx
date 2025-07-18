@@ -3,6 +3,7 @@ import { FaArrowUp } from "react-icons/fa";
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom'
 import Button from '@mui/material/Button';
+import { FaArrowLeft } from 'react-icons/fa'; 
 import {HashLink} from 'react-router-hash-link'
 const Show = () => {
 const [evolutions, setEvolutions] = useState([]);
@@ -87,12 +88,12 @@ useEffect(()=>{
   return (
     <>
             {load==true && <>
-    <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
-    <img src="Home/Go.webp"  className="w-72 h-54" />
+    <div className="w-full flex flex-col items-center justify-center gap-4 my-56">
+    <img src="Home/Go.webp"  className="w-72 h-54 lg:w-96 lg:h-60" />
     </div>
   </>}
   { load==false && <>
-       <div className="w-full h-18 flex gap-x-6 bg-sky-600">
+       <div className="w-full h-18 flex md:hidden gap-x-6 bg-sky-600">
   <HashLink smooth to='/'>
   <img src="Home/5.webp" className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
   </HashLink>
@@ -100,10 +101,30 @@ useEffect(()=>{
     <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
   </div>
+   <nav className="bg-sky-600 hidden md:block text-white backdrop-blur-md shadow-md">
+    <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+      <div className="flex items-center space-x-2">
+        <HashLink smooth to='/'>
+          <img
+          src="Home/5.webp"
+          alt="Logo"
+          className="w-20 h-16 md:w-24 md:h-20 lg:w-28 lg:h-24 object-contain"
+        />
+        </HashLink>
+      </div>
+      <div className="flex items-center justify-center">
+        <img
+          src="Home/Txt.webp"
+          alt="Brand Text"
+          className="w-52 h-14 md:w-72 md:h-20 lg:w-96 lg:h-24 object-contain"
+        />
+      </div>
+    </div>
+  </nav>
   <div className="w-full flex flex-column flex-wrap justify-around my-4"> {searchdata.map((i,ind)=>{
          return(
          <>
- <div className="flex flex-col my-6 justify-center">
+ <div className="flex flex-col my-6 justify-center md:hidden">
  <div className="w-full flex gap-4 flex-row flex-wrap justify-center items-center">
 <div className="rounded-lg bg-white shadow-lg shadow-sky-700 w-40 h-40 font-bold hover:scale-105 font-bold hover:ease-in-out duration-300">
 { i.id<650 && <img src={i.sprites.other.dream_world.front_default}  className="h-40 w-40"/>}
@@ -193,7 +214,109 @@ Weakness-: {weak}
        })
        }
 </div>
-<footer className="bg-sky-700 text-white  shadow-inner py-4">
+<div className="w-full flex flex-col gap-10 my-4 hidden md:flex">
+  {searchdata.map((i, ind) => (
+    <div
+      key={i.id}
+      className="w-full flex flex-col gap-4 items-center md:flex-row md:items-start rounded-xl p-4"
+    >
+      {/* 🖼️ Image section + Evolution */}
+      <div className="flex flex-col items-center gap-4 md:w-1/2">
+        <div className="flex flex-wrap justify-center gap-4">
+          {/* DreamWorld or Shiny */}
+          <div className="rounded-xl bg-white w-40 h-40 md:w-48 md:h-48 flex justify-center items-center hover:scale-105 transition-transform duration-300">
+            {i.id < 650 ? (
+              <img
+                src={i.sprites.other.dream_world.front_default}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              i.id < 1026 && (
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${i.id}.png`}
+                  className="w-full h-full object-contain"
+                />
+              )
+            )}
+          </div>
+          {/* Official artwork */}
+          <div className="rounded-xl bg-white w-40 h-40 lg:w-48 lg:h-48 lg:flex md:hidden justify-center items-center hover:scale-105 transition-transform duration-300">
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i.id}.png`}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
+        {/* 🧬 Evolution section moved below main images */}
+      {evolutions.filter(e => e.name !== i.name).length > 0 && (
+  <div className="w-full mt-4 text-black">
+    <h2 className="text-center text-lg font-bold mb-2">Evolutionary Species</h2>
+    
+    <div className="flex flex-wrap gap-4 justify-center">
+      {evolutions
+        .filter(evo => evo.name !== i.name)
+        .map(evo => (
+          <div
+            key={evo.id}
+            className="bg-white shadow-md shadow-sky-700 rounded-lg w-32 h-40 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300"
+          >
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evo.id}.png`}
+              className="w-24 h-24 object-contain"
+            />
+            <p className="mt-1 text-sm font-bold">
+              {evo.name[0].toUpperCase() + evo.name.slice(1)}
+            </p>
+          </div>
+        ))}
+    </div>
+  </div>
+)}
+
+      </div>
+
+      {/* ℹ️ Info section */}
+      <div className="flex flex-col md:w-1/2 gap-4 text-black font-bold">
+        <div className="flex justify-center md:justify-start">
+          <button className="bg-sky-700 text-white px-4 py-1 rounded-md font-bold">
+            #{i.id}
+          </button>
+        </div>
+
+        <p className="text-lg font-bold">Name: {i.name[0].toUpperCase() + i.name.slice(1)}</p>
+        <p className="text-lg font-bold">Type: {i.types.map(t => t.type.name).join(', ')}</p>
+        <p className="text-lg font-bold">Ability: {i.abilities.slice(0, 1).map(a => a.ability.name)}</p>
+        <p className="text-lg font-bold">Weakness: {weak}</p>
+
+        {/* Reduced description width */}
+        {description !== 'No description available.' && (
+          <p className="bg-sky-700 text-white px-4 py-2 rounded-md font-semibold text-sm max-w-md">
+            {description}
+          </p>
+        )}
+
+        {/* 📊 Stats */}
+        <div className="flex flex-wrap gap-24 mt-2">
+          <div className="space-y-1">
+            <p>Height: {i.height}</p>
+            <p>Weight: {i.weight}</p>
+            <p>Experience: {i.base_experience}</p>
+          </div>
+          <div className="space-y-1">
+            <p>Attack: {i.stats[1].base_stat}</p>
+            <p>Defense: {i.stats[2].base_stat}</p>
+            <p>Speed: {i.stats[5].base_stat}</p>
+            <p>HP: {i.stats[0].base_stat}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+<footer className="bg-sky-700 text-white  shadow-inner py-4 md:hidden">
 <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
 <div>
 <div className="flex items-center space-x-3 flex-col mb-4">
@@ -225,6 +348,15 @@ Weakness-: {weak}
 <FaArrowUp />
 </button>
 </footer>
+<HashLink smooth to="/details">
+<button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="fixed left-6 bottom-6 bg-sky-500 hidden md:block text-white p-3 rounded-full shadow-lg hover:bg-sky-700 transition"
+  aria-label="Scroll to top"
+>
+<FaArrowLeft />
+</button>
+</HashLink>
    </>
    }
     </>

@@ -267,13 +267,13 @@ showsh(n.trim())
 
   return(<>
         {loading==true && showpage===null && <>
-    <div className="w-full flex flex-col items-center justify-center gap-4 my-48">
-    <img src="Home/Go.webp"  className="w-72 h-54" />
+   <div className="w-full flex flex-col items-center justify-center gap-4 my-56">
+    <img src="Home/Go.webp"  className="w-72 h-54 lg:w-96 lg:h-60" />
     </div>
   </>}
  {showpage===true && <>
- 
-     <div className="w-full h-18 flex gap-x-6 bg-sky-600">
+  {/* //*Navbar for mobile */}
+     <div className="w-full h-18 flex gap-x-6 md:hidden bg-sky-600">
 <HashLink smooth to='/'>
   <img src="Home/5.webp" className="w-30 h-16 ml-2 mr-2 mx-1 my-1"/>
   </HashLink>
@@ -281,7 +281,28 @@ showsh(n.trim())
     <img src="Home/Txt.webp" className="w-40 h-16" />
     </div>
   </div>
-  <div className="flex justify-center gap-2 mt-4">
+    {/* //*Navbar for laptop and tablets  */}
+   <nav className="bg-sky-600 hidden md:block text-white backdrop-blur-md shadow-md">
+  <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <div className="flex items-center space-x-2">
+      <HashLink smooth to='/'>
+        <img
+        src="Home/5.webp"
+        alt="Logo"
+        className="w-20 h-16 md:w-24 md:h-20 lg:w-28 lg:h-24 object-contain"
+      />
+      </HashLink>
+    </div>
+    <div className="flex items-center justify-center">
+      <img
+        src="Home/Txt.webp"
+        alt="Brand Text"
+        className="w-52 h-14 md:w-72 md:h-20 lg:w-96 lg:h-24 object-contain"
+      />
+    </div>
+  </div>
+</nav>
+  <div className="flex justify-center gap-2 mt-4 md:mt-6">
   <div className="relative w-72">
     <input
       type="text" value={text} disabled={sload} onChange={(e)=>{
@@ -292,7 +313,7 @@ showsh(n.trim())
       }
       }
       placeholder="Search Pokemon..."
-      className="w-full font-bold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition disabled:bg-white disabled:text-black"
+      className="w-full cursor-pointer font-bold md:font-semibold px-4 py-2 pr-10 border border-sky-500 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 transition disabled:bg-white disabled:text-black"
     />
     <button disabled={sload} onClick={()=>showsearch(text)} >
     <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-500 text-xl"/>
@@ -307,7 +328,7 @@ showsh(n.trim())
   {
     isOpen===true && text.length==0 && 
     <>
-<div className="flex justify-center mt-4">
+<div className="flex justify-center mt-4 md:hidden">
   <ul
     className="w-52 bg-white border rounded shadow z-10 max-h-60 overflow-y-auto"
     role="listbox"
@@ -327,17 +348,38 @@ showsh(n.trim())
     ))}
   </ul>
 </div>
+<div className="justify-center hidden md:flex mt-6 ml-4 mr-4">
+  <div
+    className="flex flex-wrap justify-center items-center gap-4 shadow-md bg-sky-700 rounded-md p-4 max-w-4xl"
+    role="listbox"
+    tabIndex={-1}
+  >
+    {types.map(({ name, icon }) => (
+      <div
+        key={name}
+        onClick={() => handleSelect(name)}
+        className="flex items-center gap-2 px-4  py-2 cursor-pointer font-bold capitalize text-gray-800 bg-slate-100  rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
+        role="option"
+        tabIndex={0}
+      >
+        <span className="text-xl">{icon}</span>
+        <span>{name}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
     </>
   }
 {
   pokemontype.length>0 && text.length==0 && <>
-  <div className="w-full flex flex-row flex-wrap gap-4 justify-center items-center my-2">
+  <div className="w-full flex flex-row flex-wrap gap-4 justify-center items-center my-2 md:my-6">
       {types.map(({name,icon}) => {
       if(pokemontype.includes(name))
       return (<>
       <div className="w-24 h-8 p-2 bg-white flex justify-center items-center gap-1 rounded-md">
     <h1>{icon}</h1>
-    <h1 className="font-bold">{name[0].toUpperCase()+name.slice(1).toLowerCase()}</h1>
+    <h1 className="font-bold md:font-bold">{name[0].toUpperCase()+name.slice(1).toLowerCase()}</h1>
       </div>
       </>)
     })}
@@ -346,7 +388,7 @@ showsh(n.trim())
 }
 {
   ( text.length===0) && pokemontype.length!=0 &&
- <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:flex-row md:gap-x-2 md:flex-wrap md:justify-start
+ <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:flex-row md:gap-x-2 md:my-6 md:flex-wrap md:justify-center
  ">
      {subarray.map((item,index) => { return (
     <>
@@ -354,47 +396,91 @@ showsh(n.trim())
     if(item.id<1026)
     return(<>
     <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
-    <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
+    <div  className="mx-4 bg-white rounded-md md:hidden shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
 { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
 {
   item.id>=650 && item.id<1026 && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`} className="h-32 w-32"/>
 }
 <h2 className="text-sm text-black font-bold md:text-xl ml-2 mr-2">{item.name[0].toUpperCase()+item.name.slice(1)}</h2>
     </div>
+     <div className="mx-2 my-3 bg-white rounded-xl hidden md:block shadow-md hover:shadow-lg text-center transform transition-transform duration-300 hover:scale-105 w-44 md:w-52">
+    <div className="flex justify-center items-center p-3">
+      {item.id < 650 && (
+        <img
+          src={item.sprites.other.dream_world.front_default}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+      {item.id >= 650 && item.id < 1026 && (
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+    </div>
+    <h2 className="text-base md:text-lg text-gray-700 font-bold pb-3 capitalize">
+      {item.name}
+    </h2>
+  </div>
     </HashLink>
     </>)})}
     {index===subarray.length-1 &&  subdisable==false &&    <> <div className="w-full justify-center flex "> <img src="Home/5.png" style={{display:`${subdisable?"none":"block"}`}}
-    className="h-8 w-8 md:mx-8 md:h-12 md:w-12 "
+    className="h-8 w-8 md:mx-8  "
     onClick={gunc}/></div></>}
         {index===subarray.length-1 && superload &&
-      <div  className=" text-black flex justify-center w-full font-extrabold  flex justify-center md:text-xl ">Loading...</div>
+      <div  className=" text-black flex justify-center w-full font-extrabold md:font-bold  md:text-xl ">Loading...</div>
     }
     </>)})}
     </div>
 }
 { ( text.length===0) && pokemontype.length==0 &&
- <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:flex-row md:gap-x-2 md:flex-wrap md:justify-start
+ <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:my-6 md:flex-row md:gap-x-2 md:flex-wrap md:justify-center
  ">
      {pokemon.map((item,index) => { return (
     <>
     {item.map((item)=>{
     if(item.id<1026)
     return(<>
-    <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
-    <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
+   <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
+  <div className="mx-2 my-3 bg-white rounded-xl hidden md:block shadow-md hover:shadow-lg text-center transform transition-transform duration-300 hover:scale-105 w-44 md:w-52">
+    <div className="flex justify-center items-center p-3">
+      {item.id < 650 && (
+        <img
+          src={item.sprites.other.dream_world.front_default}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+      {item.id >= 650 && item.id < 1026 && (
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+    </div>
+    <h2 className="text-base md:text-lg text-gray-700 font-bold pb-3 capitalize">
+      {item.name}
+    </h2>
+  </div>
+    <div  className="mx-4 bg-white md:hidden rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
 { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
 {
   item.id>=650 && item.id<1026 && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`} className="h-32 w-32"/>
 }
 <h2 className="text-sm text-black font-bold md:text-xl ml-2 mr-2">{item.name[0].toUpperCase()+item.name.slice(1)}</h2>
     </div>
-    </HashLink>
+</HashLink>
+
+
     </>)})}
     {index===pokemon.length-1 &&  disable==false &&    <> <div className="w-full justify-center flex "> <img src="Home/5.png" style={{display:`${disable?"none":"block"}`}}
-    className="h-8 w-8 md:mx-8 md:h-12 md:w-12 "
+    className="h-8 w-8 md:mx-8"
     onClick={func}/></div></>}
         {index===pokemon.length-1 && subloading &&
-      <div  className="text-black flex justify-center w-full font-extrabold  flex justify-center md:text-xl ">Loading...</div>
+      <div  className="text-black flex justify-center w-full font-extrabold  md:text-xl md:font-bold ">Loading...</div>
     }
     </>)})}
     </div>
@@ -402,13 +488,13 @@ showsh(n.trim())
             {
       sload===true && text.length==0 &&<>
       <div className="w-full justify-center flex "> <img src="Home/5.png" 
-    className="h-14 w-14 my-32"/></div>
+    className="h-14 w-14 md:w-8 md:h-8 my-32"/></div>
       </>
     }
         {
       sload===true && text.length>0 &&<>
       <div className="w-full justify-center flex "> <img src="Home/5.png" 
-    className="h-14 w-14 my-48"/></div>
+    className="h-14 w-14 my-48 md:w-8 md:h-8 "/></div>
       </>
     }
 {
@@ -416,7 +502,7 @@ showsh(n.trim())
 
         {
       sload===false && <>
-      <div className="w-full justify-center flex my-48 text-center "> 
+      <div className="w-full justify-center items-center flex my-48 text-center "> 
       <h1 className="text-black font-bold">
       {msg}
       </h1>
@@ -431,18 +517,39 @@ showsh(n.trim())
       (store.length!=0 && text.length!=0) && <>
 
     { sload===false && 
-       <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:flex-row md:gap-x-2 md:flex-wrap md:justify-start
+       <div className="w-full flex flex-row flex-wrap justify-around my-4 gap-x-4 gap-y-4 md:flex-row md:gap-x-2 md:flex-wrap md:justify-center md:my-6
  ">
-     {store.map((item,index) => { return (
+     {store.map((item) => { return (
     <>
      <HashLink smooth to={`/show?id=${item.name}&&sn=${item.id}&&abt=${item.types[0].type.name}`}>
-        <div  className="mx-4 bg-white rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
+        <div  className="mx-4 bg-white md:hidden rounded-md shadow-sky-800 shadow-lg text-center hover:scale-105 font-bold hover:ease-in-out duration-300">
   { item.id<650 && <img src={item.sprites.other.dream_world.front_default}  className="h-32 w-32"/>}
 {
   item.id>=650 && item.id<1026 && <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`} className="h-32 w-32"/>
 }
 <h2 className="text-sm text-black font-bold md:text-xl ml-2 mr-2">{item.name[0].toUpperCase()+item.name.slice(1)}</h2>
     </div>
+     <div className="mx-2 my-3 bg-white rounded-xl hidden md:block shadow-md hover:shadow-lg text-center transform transition-transform duration-300 hover:scale-105 w-44 md:w-52">
+    <div className="flex justify-center items-center p-3">
+      {item.id < 650 && (
+        <img
+          src={item.sprites.other.dream_world.front_default}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+      {item.id >= 650 && item.id < 1026 && (
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${item.id}.png`}
+          className="h-24 w-24 object-contain"
+          alt={item.name}
+        />
+      )}
+    </div>
+    <h2 className="text-base md:text-lg text-gray-700 font-bold pb-3 capitalize">
+      {item.name}
+    </h2>
+  </div>
     </HashLink>
     </>)})}
     </div>
@@ -451,7 +558,7 @@ showsh(n.trim())
     }
     <button
   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  className="fixed bottom-6 right-6 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-500 transition"
+  className="fixed bottom-6 right-6 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-700 transition"
   aria-label="Scroll to top"
 >
 <FaArrowUp />
