@@ -283,12 +283,12 @@ Weakness-: {weak}
             #{i.id}
           </button>
         </div>
-
+        <div className="flex flex-col flex-wrap space-y-1 ">
         <p className="text-lg font-bold">Name: {i.name[0].toUpperCase() + i.name.slice(1)}</p>
         <p className="text-lg font-bold">Type: {i.types.map(t => t.type.name).join(', ')}</p>
         <p className="text-lg font-bold">Ability: {i.abilities.slice(0, 1).map(a => a.ability.name)}</p>
         <p className="text-lg font-bold">Weakness: {weak}</p>
-
+        </div>
         {/* Reduced description width */}
         {description !== 'No description available.' && (
           <p className="bg-sky-700 text-white px-4 py-2 rounded-md font-semibold text-sm max-w-md">

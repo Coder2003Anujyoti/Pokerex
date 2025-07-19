@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Details from './search/Details'
 import Show from './search/Show'
 import Play from './game/Play'
+import Warning from './Warning'; 
 const App=()=>{
  useEffect(()=>{
    document.body.className="bg-sky-400";
@@ -14,7 +15,9 @@ const App=()=>{
   <Route path="/" element={<Home />} />
   <Route path="/details" element={<Details />} />
     <Route path="/show" element={<Show />} />
-      <Route path="/play" element={<Play />} />
+      <Route path="/play" element={
+      <Warning> <Play /></Warning>
+     } />
   </Routes>
   </Router>
   </>)
